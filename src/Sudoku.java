@@ -83,8 +83,15 @@ public class Sudoku {
 
         return transposedMatrix;
     }
-
     public static int[][] solve(int[][] board) {
+        int[][] solution = recSolve(board);
+        if (solution == null) {
+            throw new IllegalArgumentException("No solution possible: Please verify input");
+        }
+        return solution;
+    }
+
+    public static int[][] recSolve(int[][] board) {
         Sudoku sudoku = new Sudoku(board);
         int curRow;
         int curCol;
@@ -102,7 +109,7 @@ public class Sudoku {
                         // If placement works, place number and solve recursively
                         if (!curRegion.values.contains(cur) && !sudoku.rowsList.get(curRow).contains(cur) && !sudoku.colsList.get(curCol).contains(cur)) {
                             sudoku.board_values[curRow][curCol] = cur;
-                            int[][] result = solve(sudoku.board_values);
+                            int[][] result = recSolve(sudoku.board_values);
                             if (result == null) {
                                 cur++;
                             } else {
@@ -115,7 +122,6 @@ public class Sudoku {
                     // If we made it this far no value can be placed
                     return null;
                 }
-
             }
         }
         return sudoku.board_values;

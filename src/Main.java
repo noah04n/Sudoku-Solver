@@ -18,6 +18,10 @@ public class Main {
                 DataParser.printBoard(board2);
                 DataParser.printBoard(result);
 
+                int[][] impossible = DataParser.parseData("impossible.csv");
+                result = Sudoku.solve(impossible);
+                DataParser.printBoard(result);
+
                 DataParser.writeBoard(result, "solution.csv");
         }
 }
