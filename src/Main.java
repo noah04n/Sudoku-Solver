@@ -17,5 +17,7 @@ public class Main {
                 result = Sudoku.solve(board2);
                 DataParser.printBoard(board2);
                 DataParser.printBoard(result);
+
+                DataParser.writeBoard(result, "solution.csv");
         }
 }

@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class DataParser {
@@ -56,6 +57,21 @@ public class DataParser {
             return 0;
         } else {
             return Integer.parseInt(num);
+        }
+    }
+
+    public static void writeBoard(int[][] board, String filePath) {
+        try (FileWriter writer = new FileWriter(filePath)) {
+            for (int[] row : board) {
+                String[] rowString = new String[row.length];
+                for (int i = 0; i < row.length; i++) {
+                    rowString[i] = Integer.toString(row[i]);
+                }
+                writer.append(String.join(",", rowString));
+                writer.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
